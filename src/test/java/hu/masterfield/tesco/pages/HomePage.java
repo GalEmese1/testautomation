@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HomePage extends hu.masterfield.pages.BasePage {
+public class HomePage extends BasePage {
 
 
     public HomePage(WebDriver driver) {
