@@ -25,7 +25,6 @@ import java.util.Properties;
 
 public class TescoSteps {
 
-
     protected static WebDriver driver;
 
     protected static WebDriverWait wait;
@@ -67,42 +66,29 @@ public class TescoSteps {
 
     @Given("nyito oldalon vagyok")
     public void nyitoOldalonVagyok() {
-
         HomePage home = new HomePage(driver);
         home.open();
-
     }
 
-    @And("a nyelv magyarra van beallitva")
-    public void aNyelvMagyarraVanBeallitva() {
+    @And("cookiekat elfogadtam")
+    public void cookiekatElfogadtam() {
+        HomePage home = new HomePage(driver);
+        home.cookieElfogadas();
     }
 
-    @When("klikkelek a Bejelentkezes-re")
-    public void klikkelekABejelentkezesRe() {
+    @And("a nyelv {string}")
+    public void aNyelv(String arg0) {
     }
 
-    @Then("megjelenik a Bejelentkezes")
-    public void megjelenikABejelentkezes() {
+    @When("bejelentkezek a {string} és {string} adatokkal")
+    public void bejelentkezekAÉsAdatokkal(String felhasznaloNev, String jelszo) {
+        /* LoginPage loginPage = home.bejelentkezes();
+        loginPage.bejelentkezes(felhasznaloNev, jelszo);
+        *  */
     }
 
-    @When("pontosan megadom az e-mail-t")
-    public void pontosanMegadomAzEMailT() {
-    }
-
-    @And("pontosan megadom a psw-ot")
-    public void pontosanMegadomAPswOt() {
-    }
-
-    @Then("bejelentkeztet, az Udvozlunk megjelenik")
-    public void bejelentkeztetAzUdvozlunkMegjelenik() {
-    }
-
-    @When("rosszul adom meg az e-mail-t, de jo formatummal")
-    public void rosszulAdomMegAzEMailTDeJoFormatummal() {
-    }
-
-    @And("akármilyen psw-ot adok meg")
-    public void akármilyenPswOtAdokMeg() {
+    @Then("bejelentkeztet, a megjelenik a\\(z) {string} felirat")
+    public void bejelentkeztetAMegjelenikAZFelirat(String arg0) {
     }
 
     @Then("Megjelenik a Sajnos nem sikerult azonosítani a megadott adatokat uzenet")
