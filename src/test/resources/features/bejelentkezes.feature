@@ -6,7 +6,7 @@ Feature: Én mint egy vásárló szeretnék bejelentkezni a Tesco online áruhá
     Scenario: Bejelentkezés érvényes adatokkal
       Given nyito oldalon vagyok
       And cookiekat elfogadtam
-      And a nyelv "magyar"
+      And a nyelv magyar
       When bejelentkezek a "gbujdoso" és "password1234" adatokkal
       Then bejelentkeztet, a megjelenik a(z) "Üdvözlünk" felirat
 

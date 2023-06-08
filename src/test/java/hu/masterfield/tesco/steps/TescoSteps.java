@@ -2,6 +2,7 @@ package hu.masterfield.tesco.steps;
 
 import hu.masterfield.Utils;
 import hu.masterfield.tesco.pages.HomePage;
+import hu.masterfield.tesco.pages.LoginPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeStep;
@@ -26,10 +27,9 @@ import java.util.Properties;
 public class TescoSteps {
 
     protected static WebDriver driver;
-
     protected static WebDriverWait wait;
-
     public static Logger log = LogManager.getLogger();
+    HomePage home = new HomePage(driver);
 
     @Before // cucumber annotáció
     public static void setup() throws IOException {
@@ -66,25 +66,35 @@ public class TescoSteps {
 
     @Given("nyito oldalon vagyok")
     public void nyitoOldalonVagyok() {
-        HomePage home = new HomePage(driver);
+
         home.open();
     }
 
+
     @And("cookiekat elfogadtam")
     public void cookiekatElfogadtam() {
-        HomePage home = new HomePage(driver);
-        home.cookieElfogadas();
+    // Órákig próbálkoztam, nem megy
+     //   home.cookieElfogadas();
     }
 
-    @And("a nyelv {string}")
-    public void aNyelv(String arg0) {
+
+    @And("a nyelv magyar")
+    public void aNyelvMagyar() {
+
+        home.aNyelvBeallitas();
     }
 
     @When("bejelentkezek a {string} és {string} adatokkal")
     public void bejelentkezekAÉsAdatokkal(String felhasznaloNev, String jelszo) {
-        /* LoginPage loginPage = home.bejelentkezes();
-        loginPage.bejelentkezes(felhasznaloNev, jelszo);
-        *  */
+
+        home.bejelentkezes();
+
+
+       LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+      //  loginPage.login("standard_user", "secret_sauce");
+
+
     }
 
     @Then("bejelentkeztet, a megjelenik a\\(z) {string} felirat")
@@ -94,4 +104,6 @@ public class TescoSteps {
     @Then("Megjelenik a Sajnos nem sikerult azonosítani a megadott adatokat uzenet")
     public void megjelenikASajnosNemSikerultAzonosítaniAMegadottAdatokatUzenet() {
     }
+
+
 }
