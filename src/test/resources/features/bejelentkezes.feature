@@ -7,7 +7,7 @@ Feature: Én mint egy vásárló szeretnék bejelentkezni a Tesco online áruhá
       Given nyito oldalon vagyok
       And cookiekat elfogadtam
       And a nyelv magyar
-      When bejelentkezek a "gbujdoso" és "password1234" adatokkal
+      When bejelentkezek a "emese.gal.id@gmail.com" és "Tesco!Tesco1" adatokkal
       Then bejelentkeztet, a megjelenik a(z) "Üdvözlünk" felirat
 
   Rule: Van érvényes regisztrációm és rosszul adom meg az e-mail/psw-öt.
@@ -15,6 +15,6 @@ Feature: Én mint egy vásárló szeretnék bejelentkezni a Tesco online áruhá
     Scenario:
       Given nyito oldalon vagyok
       And cookiekat elfogadtam
-      And a nyelv "magyar"
-      When bejelentkezek a "gbujdoso" és "password1234" adatokkal
+      And a nyelv magyar
+      When bejelentkezek a rossz "emese.galid@gmail.com" és "password1234" adatokkal
       Then Megjelenik a Sajnos nem sikerult azonosítani a megadott adatokat uzenet

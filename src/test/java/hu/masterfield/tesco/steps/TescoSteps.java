@@ -30,6 +30,8 @@ public class TescoSteps {
     protected static WebDriverWait wait;
     public static Logger log = LogManager.getLogger();
     HomePage home = new HomePage(driver);
+    LoginPage loginPage = new LoginPage(driver);
+
 
     @Before // cucumber annotáció
     public static void setup() throws IOException {
@@ -43,6 +45,8 @@ public class TescoSteps {
         // set chrome options
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments(props.getProperty("chrome.arguments"));
+        chromeOptions.addArguments("--disable-blink-features=AutomationControlled");
+        chromeOptions.addArguments("--incognito");
         //chromeOptions.setHeadless(true);
 
         // init driver
@@ -63,47 +67,45 @@ public class TescoSteps {
         Utils.takeSnapShot(driver);
     }
 
-
     @Given("nyito oldalon vagyok")
     public void nyitoOldalonVagyok() {
-
         home.open();
     }
 
-
     @And("cookiekat elfogadtam")
     public void cookiekatElfogadtam() {
-    // Órákig próbálkoztam, nem megy
-     //   home.cookieElfogadas();
+        home.cookieElfogadas();
     }
-
 
     @And("a nyelv magyar")
     public void aNyelvMagyar() {
-
         home.aNyelvBeallitas();
     }
 
     @When("bejelentkezek a {string} és {string} adatokkal")
     public void bejelentkezekAÉsAdatokkal(String felhasznaloNev, String jelszo) {
-
         home.bejelentkezes();
-
-
-       LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
-      //  loginPage.login("standard_user", "secret_sauce");
-
-
+        loginPage.login("emese.gal.id@gmail.com", "Tesco!Tesco1");
     }
 
     @Then("bejelentkeztet, a megjelenik a\\(z) {string} felirat")
     public void bejelentkeztetAMegjelenikAZFelirat(String arg0) {
+        home.bejelentkezve();
+    }
+
+    @When("bejelentkezek a rossz {string} és {string} adatokkal")
+    public void bejelentkezekARosszÉsAdatokkal(String felhasznaloNev, String jelszo) {
+        home.bejelentkezes();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        loginPage.login("emese.galid@gmail.com", "password1234");
+
     }
 
     @Then("Megjelenik a Sajnos nem sikerult azonosítani a megadott adatokat uzenet")
     public void megjelenikASajnosNemSikerultAzonosítaniAMegadottAdatokatUzenet() {
+        loginPage.loginFailed();
     }
-
 
 }

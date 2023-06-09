@@ -19,44 +19,43 @@ public class HomePage extends BasePage {
     @FindBy(id = "utility-header-login-link")
     WebElement bejelentkezesMenu;
 
+    @FindBy(xpath = "//*[@id=\"sticky-bar-cookie-wrapper\"]/span/div/div/div[2]/form[1]/button/span/span")
+    WebElement cookieButton;
+
+    @FindBy(id = "utility-header-greetings")
+    WebElement udvozlunk;
 
 
-//    @FindBy(className = "beans-cookies-notification__form") -> Access Denied
-   // @FindBy(xpath = "//*[@id=\"sticky-bar-cookie-wrapper\"]/span/div/div/div[2]/form[1]") -> Access Denied
-
-  //  @FindBy(linkText = "https://bevasarlas.tesco.hu/help/hu-HU/set-cookie-preferences?returnUrl=https%3A%2F%2Fbevasarlas.tesco.hu%2Fgroceries%2Fhu-HU%2F")
-  //  WebElement cookieButton;
-   // <button class="styled__BaseButton-rsekm1-0 styled__SecondaryButton-rsekm1-3 jChbeY kYpvCr beans-cookies-notification__button beans-button__container" type="submit"><span class="base-components__BaseElement-sc-1mosoyj-0 styled__InnerContainer-rsekm1-1 oznwo fuFres beans-button__inner-container"><span class="base-components__BaseElement-sc-1mosoyj-0 styled__TextSpan-rsekm1-4 oznwo GDiMp beans-button__text">Minden Cookie elfogadása</span></span></button>
-    // //*[@id="sticky-bar-cookie-wrapper"]/span/div/div/div[2]/form[1]
-    // #sticky-bar-cookie-wrapper > span > div > div > div.base-components__BaseElement-sc-1mosoyj-0.styled__ButtonContainer-sc-1vnc1v2-4.oznwo.ksIudk.beans-cookies-notification__buttons-container > form:nth-child(1) > button > span > span
-    // https://bevasarlas.tesco.hu/help/hu-HU/set-cookie-preferences?returnUrl=https%3A%2F%2Fbevasarlas.tesco.hu%2Fgroceries%2Fhu-HU%2F
     public void open() {
         driver.get("https://bevasarlas.tesco.hu/groceries/hu-HU/");
         assertTrue(isLoaded(tescoLogo));
         assertTrue(isLoaded(bejelentkezesMenu));
+        assertTrue(isLoaded(cookieButton));
+    }
 
-    //    assertTrue(isLoaded(cookieButton));
-          }
+    public void aNyelvBeallitas() {
+        String nyelv;
+        if (isLoaded(english)) {
+            nyelv = "magyar";
+        } else {
+            nyelv = "english";
+            english.click();
+        }
+    }
 
-    String nyelv;
-          public void aNyelvBeallitas() {
-
-
-              if (isLoaded(english)) {
-                  nyelv = "magyar";
-              } else {
-                nyelv = "english";
-                english.click();
-              }
-
-          }
-  /*  public void cookieElfogadas() {
+    public void cookieElfogadas() {
         cookieButton.click();
     }
-   */
 
+    // a Bejelentkezés menüpont-ra kattint
     public void bejelentkezes() {
         bejelentkezesMenu.click();
     }
+
+    public void bejelentkezve() {
+        assertTrue(isLoaded(udvozlunk));;
+    }
+
+
 
 }
